@@ -1,0 +1,57 @@
+@screen-xs-max: 768px;
+@screen-sm-max: 992px;
+
+.headtoolbar {
+  display: flex;
+  padding: 28px 48px;
+  position: fixed;
+  background: white;
+  width: 100%;
+  align-items: center;
+
+  .icon {
+    padding-left: 24px;
+    font-size: 32px;
+    &:hover, &:active {
+      cursor: pointer;
+    }
+  }
+  
+  .profilewrapper {
+    padding-left: 24px;
+    &:hover, &:active {
+      cursor: pointer;
+    }
+  }
+}
+
+.menuoverlay {
+  padding: 8px 0;
+  .menuitem {
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+    .menuitemicon {
+      margin-right: 16px;
+    }
+  }
+}
+
+@media all and (max-width: @screen-sm-max) {
+  .headtoolbar {
+    padding: 28px 24px;
+  }
+  
+  .icon, .profilewrapper {
+    padding-left: 12px;
+  }
+}
+
+@media all and (max-width: @screen-xs-max) {
+  .dropdown {
+    width: 100%;
+    .menuoverlay {
+      box-shadow: none;
+      text-align: center;
+    }
+  }
+}
