@@ -1,12 +1,16 @@
 import React from 'react';
 import HeadToolbar from '@/components/HeadToolbar';
+import FootToolbar from '@/components/FootToolbar';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
 
+export enum pageType {}
+
+
 export interface Iprops {
   pageType: string;
-};
+}
 
 const PageContainer = (props: Iprops) => {
   const { pageType } = props;
@@ -24,7 +28,7 @@ const PageContainer = (props: Iprops) => {
     <div className={style.pagecontainer}>
       <HeadToolbar />
       {/* {getContent(pageType)} */}
-      {/* <FooterToolbar className={classnames('.sm_hidden', '.md_hidden', '.lg_hidden')}/> */}
+      <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} />
     </div>
   );
 };

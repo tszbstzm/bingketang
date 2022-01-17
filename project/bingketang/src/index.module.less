@@ -6,10 +6,15 @@
 @screen-sm-max: 992px;
 @screen-md-max: 1200px;
 
+:global(._text) {
+  text-indent: 4px;
+  letter-spacing: 4px;
+}
+
 @media all and (min-width: @screen-lg-min) {
   body {
     :global(.lg_hidden) {
-      display: none;
+      display: none !important;
     }
   }
 }
@@ -17,7 +22,7 @@
 @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
   body {
     :global(.md_hidden) {
-      display: none;
+      display: none !important;
     }
   }
 }
@@ -25,7 +30,7 @@
 @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
   body {
     :global(.sm_hidden) {
-      display: none;
+      display: none !important;
     }
   }
 }
@@ -33,7 +38,7 @@
 @media all and (max-width: @screen-xs-max) {
   body {
     :global(.xs_hidden) {
-      display: none;
+      display: none !important;
     }
   }
 }
