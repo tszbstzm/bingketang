@@ -8,10 +8,10 @@ import { SEARCH_THE_COURSES_OF_INTEREST } from '@/constant/text';
 const { Search } = Input;
 
 interface Iprops {
-  className: string;
+  className?: string;
 }
 
-const HeadToolbar = (props: Iprops) => {
+const SearchInput = (props: Iprops) => {
   const handleSearch = () => {};
 
   return (
@@ -19,4 +19,4 @@ const HeadToolbar = (props: Iprops) => {
   );
 };
 
-export default HeadToolbar;
+export default SearchInput;

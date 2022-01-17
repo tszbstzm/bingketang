@@ -3,3 +3,7 @@ export const TEACH_A_COURSE = '新建课程';
 export const JOIN_A_COURSE = '加入课程';
 export const MY_CENTER = '个人中心';
 export const MY_COURSES = '我的课程';
+export const MOBILE_HOME_PAGE = '首页';
+export const MOBILE_MY_COURSES = '课程';
+export const MOBILE_MESSEAGE_LIST = '消息';
+export const MOBILE_MY_CENTER = '个人';

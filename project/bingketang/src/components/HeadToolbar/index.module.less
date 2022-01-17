@@ -3,7 +3,7 @@
 
 .headtoolbar {
   display: flex;
-  padding: 28px 48px;
+  padding: 24px 48px;
   position: fixed;
   background: white;
   width: 100%;
@@ -12,36 +12,38 @@
   .icon {
     padding-left: 24px;
     font-size: 32px;
-    &:hover, &:active {
-      cursor: pointer;
-    }
-  }
-  
-  .profilewrapper {
-    padding-left: 24px;
+    display: flex;
     &:hover, &:active {
       cursor: pointer;
     }
   }
 }
 
-.menuoverlay {
-  padding: 8px 0;
-  .menuitem {
-    padding: 16px 32px !important;
-    font-size: 16px !important;
-    .menuitemicon {
-      margin-right: 16px;
+.dropdown {
+  .menuoverlay {
+    padding: 8px 0;
+    top: 4px;
+    .menuitem {
+      padding: 8px 16px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .menuitemicon {
+        font-size: 20px;
+        margin-right: 16px;
+        margin-top: 2px;
+      }
     }
   }
 }
 
 @media all and (max-width: @screen-sm-max) {
   .headtoolbar {
-    padding: 28px 24px;
+    padding: 24px 24px;
   }
   
-  .icon, .profilewrapper {
+  .icon {
     padding-left: 12px;
   }
 }
