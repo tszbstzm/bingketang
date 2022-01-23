@@ -1,33 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HeadToolbar from '@/components/HeadToolbar';
 import FootToolbar from '@/components/FootToolbar';
+import { useParams } from "react-router-dom";
 
 import style from './index.module.less';
 import classnames  from 'classnames';
 
-export enum pageType {}
-
-
-export interface Iprops {
-  pageType: string;
+export enum pageType {
+  HomePage = 'home',
+  CoursesPage = 'course',
+  MessagePage = 'message',
+  PersonalPage = 'personal'
 }
 
-const PageContainer = (props: Iprops) => {
-  const { pageType } = props;
+const PageContainer = () => {
+  const params = useParams();
 
-  const getContent = (_pageType: string) => {
+  const getContent = (_pageType?: string) => {
+    console.log(_pageType);
     switch(_pageType) {
       case 'home':
+        return <div>{"home"}</div>;
+      case 'course':
+        return <div>{"course"}</div>;
+      case 'message':
+        return <div>{"message"}</div>;
+      case 'personal':
+        return <div>{"personal"}</div>;
       default:
         // <HomeCoursesContainer/>
-        return <div>{"content"}</ div>;
+        return <div>{"content"}</div>;
     }
-  }
+  };
 
   return (
     <div className={style.pagecontainer}>
       <HeadToolbar />
-      {/* {getContent(pageType)} */}
+      <div className={classnames(style.maincontainer)}>{getContent(params.page)}</div>
       <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} />
     </div>
   );

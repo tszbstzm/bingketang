@@ -1,4 +1,16 @@
+@screen-sm-max: 992px;
+
 .pagecontainer {
   background: rgb(240, 255, 246);
-  height: 1200px;
+
+  .maincontainer {
+    height: 1200px;
+    padding: 88px, 48px;
+  }
+}
+
+@media all and (max-width: @screen-sm-max) {
+  .maincontainer {
+    padding: 88px 24px;
+  }
 }

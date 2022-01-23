@@ -2,63 +2,51 @@ import React, { useState } from 'react';
 import FooterTab from './FooterTab';
 import { HomeFilled, HomeOutlined, MessageFilled, MessageOutlined, ReadFilled, ReadOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
-import { MOBILE_HOME_PAGE, MOBILE_MESSEAGE_LIST, MOBILE_MY_CENTER, MOBILE_MY_COURSES } from '@/constant/text';
+import { MOBILE_HOME_PAGE, MOBILE_MESSAGE_LIST, MOBILE_MY_CENTER, MOBILE_MY_COURSES } from '@/constant/text';
+import { useNavigate } from 'react-router-dom';
+import { getCurrentUser } from '@/services/actions';
+import { openLoginPanel } from '@/components/loginPanel';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
+import { pageType } from '@/pages/Container';
 
 interface Iprops {
   className?: string;
 }
 
-enum footTabType {
-  HomePage,
-  CoursesPage,
-  MessagePage,
-  PersonalPage
-}
-
 const FootToolbar = (props: Iprops) => {
-  const [currentTab, setCurrentTab] = useState(footTabType.HomePage);
+  const navigate = useNavigate();
+  const [currentTab, setCurrentTab] = useState(pageType.HomePage);
+  const currentUserId = getCurrentUser();
 
-  const handleHome = () => {
-    setCurrentTab(footTabType.HomePage);
+  const handleClick = (key: pageType) => {
+    if (key !== pageType.HomePage && !currentUserId) {
+      openLoginPanel();
+      return;
+    }
+    setCurrentTab(key);
+    navigate(`/${key}`);
   };
-  const handleCourse = () => {
-    setCurrentTab(footTabType.CoursesPage);
-  };
-  const handleMesseage = () => {
-    setCurrentTab(footTabType.MessagePage);
-  };
-  const handlePersonal = () => {
-    setCurrentTab(footTabType.PersonalPage);
-  };
+
+  const footList = [
+    { key: pageType.HomePage, outlinedContent: <HomeOutlined />, filledContent: <HomeFilled />, content: MOBILE_HOME_PAGE },
+    { key: pageType.CoursesPage, outlinedContent: <ReadOutlined />, filledContent: <ReadFilled />, content: MOBILE_MY_COURSES },
+    { key: pageType.MessagePage, outlinedContent: <MessageOutlined />, filledContent: <MessageFilled />, content: MOBILE_MESSAGE_LIST },
+    { key: pageType.PersonalPage, outlinedContent: <Avatar size="small" icon={<UserOutlined />} />, content: MOBILE_MY_CENTER },
+  ];
 
   return (
     <div className={classnames(style.foottoolbar, props.className)}>
-      <FooterTab 
-        outlinedContent={<HomeOutlined />}
-        filledContent={<HomeFilled />}
-        content={MOBILE_HOME_PAGE}
-        isSelected={currentTab === footTabType.HomePage}
-        onClick={handleHome} />
-      <FooterTab 
-        outlinedContent={<ReadOutlined />}
-        filledContent={<ReadFilled />}
-        content={MOBILE_MY_COURSES}
-        isSelected={currentTab === footTabType.CoursesPage}
-        onClick={handleCourse} />
-      <FooterTab 
-        outlinedContent={<MessageOutlined />}
-        filledContent={<MessageFilled />}
-        content={MOBILE_MESSEAGE_LIST}
-        isSelected={currentTab === footTabType.MessagePage}
-        onClick={handleMesseage} />
-      <FooterTab 
-        outlinedContent={<Avatar size="small" icon={<UserOutlined />} />}
-        content={MOBILE_MY_CENTER}
-        isSelected={currentTab === footTabType.PersonalPage}
-        onClick={handlePersonal} />
+      {footList.map((value) => (
+        <FooterTab
+          key={value.key}
+          outlinedContent={value.outlinedContent}
+          filledContent={value.filledContent}
+          content={value.content}
+          isSelected={currentTab === value.key}
+          onClick={() => handleClick(value.key)} />
+      ))}
     </div>
   );
 };
