@@ -14,7 +14,8 @@ import classnames  from 'classnames';
 
 const HeadToolbar = () => {
   const navigate = useNavigate();
-  const currentUserId = getCurrentUser();
+  const currentUser = getCurrentUser();
+  const currentUserId = currentUser.id;
 
   const handleMessage = () => {
     navigate(`/${pageType.MessagePage}`);
@@ -24,7 +25,7 @@ const HeadToolbar = () => {
   };
 
   const handlePersonal = ({ key }: { key: string; }) => {
-    navigate(`/${key}`);
+    navigate(`/${pageType.PersonalPage}/${key}`);
   };
   const addCourseMenuList = [
     { Icon: FundProjectionScreenOutlined, content: TEACH_A_COURSE }, 
@@ -59,7 +60,7 @@ const HeadToolbar = () => {
       </Dropdown>
       <Dropdown overlay={getMenu(personalMenuList, handlePersonal)} overlayClassName={classnames(style.dropdown)} placement="bottomRight">
       <div className={classnames(style.icon, 'xs_hidden')}>
-        <Avatar icon={<UserOutlined />} />
+        <Avatar src={currentUser.profile} />
       </div>
       </Dropdown>
     </div>

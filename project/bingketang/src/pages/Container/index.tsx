@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import HeadToolbar from '@/components/HeadToolbar';
 import FootToolbar from '@/components/FootToolbar';
 import { useParams } from "react-router-dom";
+import MessagePage from '../MessagePage';
 
 import style from './index.module.less';
-import classnames  from 'classnames';
+import classNames  from 'classnames/bind';
+import classnames  from 'classnames/bind';
+
+const cx = classNames.bind(style);
 
 export enum pageType {
   HomePage = 'home',
@@ -24,7 +28,7 @@ const PageContainer = () => {
       case 'course':
         return <div>{"course"}</div>;
       case 'message':
-        return <div>{"message"}</div>;
+        return <MessagePage />;
       case 'personal':
         return <div>{"personal"}</div>;
       default:
@@ -36,7 +40,7 @@ const PageContainer = () => {
   return (
     <div className={style.pagecontainer}>
       <HeadToolbar />
-      <div className={classnames(style.maincontainer)}>{getContent(params.page)}</div>
+      <div className={cx('maincontainer', `maincontainer--${params.page}`)}>{getContent(params.page)}</div>
       <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} />
     </div>
   );

@@ -1,0 +1,36 @@
+@screen-xs-max: 768px;
+
+.messagepage {
+  display: flex;
+  height: 100%;
+  .messageitem {
+    width: 30%;
+    min-width: 180px;
+    overflow-y: auto;
+    background-color: rgb(207, 193, 235);
+    margin-bottom: 0;
+  }
+  .messagedetail {
+    flex-grow: 1;
+    background-color: rgb(243, 234, 217);
+  }
+}
+
+@media all and (max-width: @screen-xs-max) {
+  .messagepage {
+    flex-direction: column;
+    .messageitem {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 6px;
+      height: 96px;
+      min-height: 96px;
+      display: flex;
+      padding: 0 16px;
+    }
+    .messagedetail {
+      min-height: 320px;
+      flex-grow: 1;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@screen-xs-max: 768px;
+
+.item {
+  display: flex;
+  align-items: center;
+  background: rgb(207, 232, 240);
+  padding: 16px;
+  border-bottom: 1px solid gray;
+  &:hover, &:active {
+    cursor: pointer;
+  }
+
+  .avatar {
+    background: white;
+    margin-right: 16px;
+  }
+}
+
+@media all and (max-width: @screen-xs-max) {
+  .item {
+    border: none;
+
+    .avatar {
+      margin-right: 0;
+      height: 48px;
+      width: 48px;
+    }
+  }
+}

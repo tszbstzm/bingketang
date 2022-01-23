@@ -16,3 +16,6 @@ export const SECORD_CONFIRM_CODE_TEXT = '验证码';
 export const ACT_AFTER_LOGIN_TEXT = '请登录后再进行操作';
 export const LOGIN_TEXT = '登录';
 export const NEW_USER_REGISTER_TEXT = '新用户注册';
+export const CANCEL_COMMEN = '取消';
+export const SEND_COMMEN_PC = '发送（Enter）';
+export const SEND_COMMEN_MOBILE = '发送';

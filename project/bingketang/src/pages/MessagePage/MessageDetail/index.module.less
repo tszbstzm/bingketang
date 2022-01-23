@@ -1,0 +1,57 @@
+.messagedetail {
+  display: flex;
+  flex-direction: column;
+
+  .messcontainer {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 16px 32px;
+    .mess {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+
+      .avatar {
+        background: white;
+      }
+
+      .text {
+        padding: 10px 20px;
+        margin: 0 16px;
+        background: white;
+        border-radius: 8px;
+      }
+
+      &.fromme {
+        flex-direction: row-reverse;
+
+        .text {
+          background: rgb(208, 217, 223);
+        }
+      }
+    }
+  }
+
+  .input {
+    background: white;
+
+    .textarea {
+      resize: none;
+      padding: 8px 12px;
+    }
+
+    .btgroup {
+      display: flex;
+      flex-direction: row-reverse;
+      flex-wrap: wrap;
+      margin: 8px 12px 0;
+
+      .button {
+        margin-left: 16px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        // border: none;
+      }
+    }
+  }
+}
