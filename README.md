@@ -1,5 +1,5 @@
 # bingketang
-丙课堂，功能不全的雨课堂
+丙课堂，实现了网络学堂 + 雨课堂的基本功能
 
 ## 开发日志
 ### 2022-01-17
@@ -13,3 +13,10 @@
 2.  配置eslint
 
 心得: 1. 尽量把用共性的内容写成可复用的组件或者函数。今天重写了headtoolbar里两处相似的菜单，包装成了函数，重写了foottoolbar中的选项标签，包装成了组件foottab，如果一开始就有复用的意识，就不需要重写了；2. webpack要把less-loader放在最后，否则会无法识别.less文件中的//；
+
+### 2022-01-23
+1. add service: 路由配置
+2. add page: message page
+3. update page: message page
+
+心得：1. router很好用，但是不能乱用，v6和v5改了不少东西，脑壳痛； 2. js读取本地文件有点问题，虽然是为了web安全考虑； 4. 一开始没想好怎么用纯css的方法（指不监听）在pc上做到列表页与聊天页并存，移动端显示列表页但是点进去是聊天页，所以把移动端设计成上面是头像icon横排排列，下面是聊天页，还调了蛮久样式。结果睡觉前在床上想到解决方案了（加了一个activechat的hook），早上急忙起来update了一下，成功；3. 几件浪费了时间的小时： 3.1 修了半个小时scrolltobottom的bug，没想到是因为把messages写成了message（是个全局变量vs还不给我报错） 3.2 textarea 输入回车发送后还会再次输入回车的问题，第一个方案是在keyup事件做清空，第二个方案顺应原生textarea，enter换行，ctrl+enter发送，最后还是看别人代码的时候想到正确的解决方案应该是 e.preventDefault() 呀； 
