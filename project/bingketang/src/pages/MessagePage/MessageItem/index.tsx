@@ -24,7 +24,7 @@ const MessageItem = (props: Iprops) => {
   return (
     <li className={classnames(style.item)} onClick={handleClick}>
       <Avatar className={classnames(style.avatar)} src={chat.toUser.profile} />
-      <div className={classnames('xs_hidden')}>{chat.toUser.nickname}</div>
+      <div>{chat.toUser.nickname}</div>
     </li>
   );
 };

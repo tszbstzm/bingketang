@@ -6,16 +6,18 @@ import { Avatar, Button, Input, message } from 'antd';
 import style from './index.module.less';
 import classnames  from 'classnames';
 import { CANCEL_COMMEN, SEND_COMMEN_MOBILE, SEND_COMMEN_PC } from "@/constant/text";
+import { LeftOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 
 interface Iprops {
   chat: IChat,
-  className: string
+  className?: string,
+  onBack?: () => void
 }
 
 const messageDetail = (props: Iprops) => {
-  const { chat, className } = props;
+  const { chat, className, onBack } = props;
   const currentUser = getCurrentUser();
   const [messages, setMessages] = useState(getMessages(chat));
   const [value, setValue] = useState('');
@@ -64,6 +66,10 @@ const messageDetail = (props: Iprops) => {
 
   return (
     <div className={classnames(className, style.messagedetail)}>
+      <div className={classnames(style.messagehead)}>
+        <LeftOutlined className={classnames(style.messageback, 'sm_hidden', 'md_hidden', 'lg_hidden')} onClick={onBack}/>
+        <div>{chat.toUser.nickname}</div>
+      </div>
       <div className={classnames(style.messcontainer)} ref={messcontainerRef}>{renderMessages()}</div>
       <div className={classnames(style.input)}>
         <TextArea 

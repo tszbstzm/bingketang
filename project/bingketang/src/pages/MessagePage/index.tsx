@@ -9,13 +9,14 @@ import classnames  from 'classnames';
 const messagePage = () => {
   const messageList = getChats(8);
   const [chat, setChat] = useState(messageList[0] || null);
+  const [chatActive, setChatActive] = useState(false);
 
   return (
     <div className={classnames(style.messagepage)}>
-      <ul className={classnames(style.messageitem)}>
-        {messageList.map((value, index) => <MessageItem key={index} chat={value} onClick={() => {setChat(value);}}/>)}
+      <ul className={classnames(style.messageitem, chatActive && 'xs_hidden')}>
+        {messageList.map((value, index) => <MessageItem key={index} chat={value} onClick={() => {setChat(value); setChatActive(true);}}/>)}
       </ul>
-      <MessageDetail className={classnames(style.messagedetail)} chat={chat}/>
+      <MessageDetail className={classnames(style.messagedetail,  !chatActive && 'xs_hidden')} chat={chat} onBack={() => setChatActive(false)}/>
     </div>
   );
 };
