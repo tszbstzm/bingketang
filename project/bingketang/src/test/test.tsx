@@ -3,14 +3,16 @@ import { IChat, IMessage, IUser } from "@/constant/type";
 export const currentUser: IUser = {
   id: '19980705',
   nickname: 'SLJ19980705',
-  profile: 'https://joeschmoe.io/api/v1/19980705'
+  profile: 'https://joeschmoe.io/api/v1/19980705',
+  mail: 'SLJ19980705@163.com'
 };
 
 export const createUser = (id: string) => {
   return {
     id,
     nickname: `CESHI${id}`,
-    profile: `https://joeschmoe.io/api/v1/${id}`
+    profile: `https://joeschmoe.io/api/v1/${id}`,
+    mail: `CESHI${id}@163.com`
   } as IUser;
 };
 

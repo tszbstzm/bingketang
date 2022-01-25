@@ -16,7 +16,7 @@ interface Iprops {
   onBack?: () => void
 }
 
-const messageDetail = (props: Iprops) => {
+const MessageDetail = (props: Iprops) => {
   const { chat, className, onBack } = props;
   const currentUser = getCurrentUser();
   const [messages, setMessages] = useState(getMessages(chat));
@@ -99,4 +99,4 @@ const messageDetail = (props: Iprops) => {
   );
 };
 
-export default messageDetail;
+export default MessageDetail;

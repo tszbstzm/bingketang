@@ -24,8 +24,8 @@ const HeadToolbar = () => {
   const handleAddCourse = () => {
   };
 
-  const handlePersonal = ({ key }: { key: string; }) => {
-    navigate(`/${pageType.PersonalPage}/${key}`);
+  const handlePersonal = () => {
+    navigate(`/${pageType.PersonalPage}`);
   };
   const addCourseMenuList = [
     { Icon: FundProjectionScreenOutlined, content: TEACH_A_COURSE }, 

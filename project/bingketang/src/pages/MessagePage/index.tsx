@@ -6,7 +6,7 @@ import { getChats } from "@/services/actions";
 import style from './index.module.less';
 import classnames  from 'classnames';
 
-const messagePage = () => {
+const MessagePage = () => {
   const messageList = getChats(8);
   const [chat, setChat] = useState(messageList[0] || null);
   const [chatActive, setChatActive] = useState(false);
@@ -21,4 +21,4 @@ const messagePage = () => {
   );
 };
 
-export default messagePage;
+export default MessagePage;

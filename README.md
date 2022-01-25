@@ -20,3 +20,8 @@
 3. update page: message page
 
 心得：1. router很好用，但是不能乱用，v6和v5改了不少东西，脑壳痛； 2. js读取本地文件有点问题，虽然是为了web安全考虑； 4. 一开始没想好怎么用纯css的方法（指不监听）在pc上做到列表页与聊天页并存，移动端显示列表页但是点进去是聊天页，所以把移动端设计成上面是头像icon横排排列，下面是聊天页，还调了蛮久样式。结果睡觉前在床上想到解决方案了（加了一个activechat的hook），早上急忙起来update了一下，成功；3. 几件浪费了时间的小时： 3.1 修了半个小时scrolltobottom的bug，没想到是因为把messages写成了message（是个全局变量vs还不给我报错） 3.2 textarea 输入回车发送后还会再次输入回车的问题，第一个方案是在keyup事件做清空，第二个方案顺应原生textarea，enter换行，ctrl+enter发送，最后还是看别人代码的时候想到正确的解决方案应该是 e.preventDefault() 呀； 
+
+### 2022-01-26
+1. add page: personal page
+
+心得：没有实现功能的个人页，需要写一个全局的弹窗组件

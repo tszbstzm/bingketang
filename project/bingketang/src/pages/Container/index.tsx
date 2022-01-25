@@ -3,10 +3,11 @@ import HeadToolbar from '@/components/HeadToolbar';
 import FootToolbar from '@/components/FootToolbar';
 import { useParams } from "react-router-dom";
 import MessagePage from '../MessagePage';
+import PersonalPage from '../PersonalPage';
 
 import style from './index.module.less';
 import classNames  from 'classnames/bind';
-import classnames  from 'classnames/bind';
+import classnames  from 'classnames';
 
 const cx = classNames.bind(style);
 
@@ -30,7 +31,7 @@ const PageContainer = () => {
       case 'message':
         return <MessagePage />;
       case 'personal':
-        return <div>{"personal"}</div>;
+        return <PersonalPage />;
       default:
         // <HomeCoursesContainer/>
         return <div>{"content"}</div>;

@@ -19,3 +19,6 @@ export const NEW_USER_REGISTER_TEXT = '新用户注册';
 export const CANCEL_COMMEN = '取消';
 export const SEND_COMMEN_PC = '发送（Enter）';
 export const SEND_COMMEN_MOBILE = '发送';
+export const CHANGE_PROFILE = '修改个人信息';
+export const CHANGE_PASSWORD = '修改密码';
+export const QUIT = '退出';

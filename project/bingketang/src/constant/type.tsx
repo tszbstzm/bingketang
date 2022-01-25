@@ -1,7 +1,8 @@
 export type IUser = {
   id: string,
   nickname: string,
-  profile: string
+  profile: string,
+  mail: string
 };
 
 export type IChat = {
