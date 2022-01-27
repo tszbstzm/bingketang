@@ -1,14 +1,17 @@
+@screen-sm-min: 768px;
+
 @screen-xs-max: 768px;
 @screen-sm-max: 992px;
 
 .pagecontainer {
-  background: rgb(240, 255, 246);
+  // background: rgb(240, 255, 246);
   // min-height: max(100%, 650px);
   height: 100%;
 
   .maincontainer {
     // height: 1200px;
-    // min-height: max(100%, 650px);
+    min-height: max(100%, 650px);
+    background: rgb(240, 255, 246);
     padding: 88px 48px 24px;
 
     &.maincontainer--message {
@@ -17,7 +20,7 @@
   }
 }
 
-@media all and (max-width: @screen-sm-max) {
+@media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
   .pagecontainer {
     .maincontainer {
       padding: 88px 24px 24px;

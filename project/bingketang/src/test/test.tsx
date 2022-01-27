@@ -1,4 +1,4 @@
-import { IChat, IMessage, IUser } from "@/constant/type";
+import { IChat, ICourse, IMessage, IUser } from "@/constant/type";
 
 export const currentUser: IUser = {
   id: '19980705',
@@ -44,4 +44,16 @@ export const createMessage = (id: string, chat: IChat) => {
     sendUser: random < 0.5 ? chat.fromUser : chat.toUser,
     sendTime: new Date()
   } as IMessage;
+};
+
+export const createCourse = (id: string) => {
+  return {
+    id,
+    teacher: createUser(id),
+    title: `CESHI_COURSE${id}`,
+    description: `CESHI_DESCRIPTION${id.repeat(5)}`,
+    follower: Math.ceil(Math.random() * 10000),
+    cover: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
+    longCover: 'http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1207/09/c1/12275751_1341814374436.jpg'
+  } as ICourse;
 };

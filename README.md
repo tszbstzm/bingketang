@@ -25,3 +25,8 @@
 1. add page: personal page
 
 心得：没有实现功能的个人页，需要写一个全局的弹窗组件
+
+### 2022-01-27
+1. add page: home page + course page
+
+心得：有的时候要想一想切换是用hook还是router

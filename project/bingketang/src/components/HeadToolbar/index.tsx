@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchInput from './SearchInput';
 import { Avatar, Dropdown, Menu } from 'antd';
-import { MessageOutlined, UserOutlined, ReadOutlined, UsergroupAddOutlined, PlusCircleTwoTone, FundProjectionScreenOutlined } from '@ant-design/icons';
+import { MessageOutlined, UserOutlined, ReadOutlined, UsergroupAddOutlined, PlusCircleTwoTone, FundProjectionScreenOutlined, HomeOutlined } from '@ant-design/icons';
 import { JOIN_A_COURSE, MY_CENTER, MY_COURSES, TEACH_A_COURSE } from '@/constant/text';
 import { useNavigate } from 'react-router-dom';
 import { pageType } from '@/pages/Container';
@@ -17,6 +17,10 @@ const HeadToolbar = () => {
   const currentUser = getCurrentUser();
   const currentUserId = currentUser.id;
 
+  const handleHome = () => {
+    navigate(`/${pageType.HomePage}`);
+  };
+
   const handleMessage = () => {
     navigate(`/${pageType.MessagePage}`);
   };
@@ -24,9 +28,10 @@ const HeadToolbar = () => {
   const handleAddCourse = () => {
   };
 
-  const handlePersonal = () => {
-    navigate(`/${pageType.PersonalPage}`);
+  const handlePersonal = (param: { key: string }) => {
+    navigate(`/${param.key}`);
   };
+  
   const addCourseMenuList = [
     { Icon: FundProjectionScreenOutlined, content: TEACH_A_COURSE }, 
     { Icon: UsergroupAddOutlined, content: JOIN_A_COURSE }
@@ -53,6 +58,7 @@ const HeadToolbar = () => {
 
   return (
     <div className={style.headtoolbar}>
+      <HomeOutlined onClick={handleHome} className={classnames(style.icon, style.homeicon, 'xs_hidden')} />
       <SearchInput className={classnames(style.searchinput)} />
       <MessageOutlined onClick={currentUserId ? handleMessage : openLoginPanel} className={classnames(style.icon, 'xs_hidden')} />
       <Dropdown overlay={getMenu(addCourseMenuList, handleAddCourse)} trigger={["hover", "click"]} overlayClassName={classnames(style.dropdown)} placement="bottomRight">

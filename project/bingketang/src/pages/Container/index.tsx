@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HeadToolbar from '@/components/HeadToolbar';
 import FootToolbar from '@/components/FootToolbar';
 import { useParams } from "react-router-dom";
 import MessagePage from '../MessagePage';
 import PersonalPage from '../PersonalPage';
+import CoursePage from '../CoursePage';
+import HomePage from '../HomePage';
 
 import style from './index.module.less';
 import classNames  from 'classnames/bind';
@@ -18,6 +20,11 @@ export enum pageType {
   PersonalPage = 'personal'
 }
 
+export enum filterType {
+  MyStudyCourse,
+  MyTeachCourse
+}
+
 const PageContainer = () => {
   const params = useParams();
 
@@ -25,16 +32,15 @@ const PageContainer = () => {
     console.log(_pageType);
     switch(_pageType) {
       case 'home':
-        return <div>{"home"}</div>;
+        return <HomePage />;
       case 'course':
-        return <div>{"course"}</div>;
+        return <CoursePage />;
       case 'message':
         return <MessagePage />;
       case 'personal':
         return <PersonalPage />;
       default:
-        // <HomeCoursesContainer/>
-        return <div>{"content"}</div>;
+        return <HomePage />;
     }
   };
 

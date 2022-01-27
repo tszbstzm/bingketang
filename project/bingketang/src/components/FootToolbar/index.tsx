@@ -6,10 +6,10 @@ import { MOBILE_HOME_PAGE, MOBILE_MESSAGE_LIST, MOBILE_MY_CENTER, MOBILE_MY_COUR
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '@/services/actions';
 import { openLoginPanel } from '@/components/loginPanel';
+import { pageType } from '@/pages/Container';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
-import { pageType } from '@/pages/Container';
 
 interface Iprops {
   className?: string;

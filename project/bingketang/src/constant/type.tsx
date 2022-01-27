@@ -18,3 +18,13 @@ export type IMessage = {
   sendUser: IUser,
   sendTime: Date
 };
+
+export type ICourse = {
+  id: string,
+  teacher: IUser,
+  title: string,
+  description: string,
+  follower: number,
+  cover: string
+  longCover?: string
+};

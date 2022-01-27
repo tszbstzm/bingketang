@@ -22,3 +22,5 @@ export const SEND_COMMEN_MOBILE = '发送';
 export const CHANGE_PROFILE = '修改个人信息';
 export const CHANGE_PASSWORD = '修改密码';
 export const QUIT = '退出';
+export const MY_TEACH_COURSE = '我教的课程';
+export const MY_STUDY_COURSE = '我学的课程';
