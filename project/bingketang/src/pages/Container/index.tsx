@@ -6,6 +6,7 @@ import MessagePage from '../MessagePage';
 import PersonalPage from '../PersonalPage';
 import CoursePage from '../CoursePage';
 import HomePage from '../HomePage';
+import RegisterPage from '../RegisterPage';
 
 import style from './index.module.less';
 import classNames  from 'classnames/bind';
@@ -17,7 +18,8 @@ export enum pageType {
   HomePage = 'home',
   CoursesPage = 'course',
   MessagePage = 'message',
-  PersonalPage = 'personal'
+  PersonalPage = 'personal',
+  RegisterPage = 'register'
 }
 
 export enum filterType {
@@ -29,16 +31,17 @@ const PageContainer = () => {
   const params = useParams();
 
   const getContent = (_pageType?: string) => {
-    console.log(_pageType);
     switch(_pageType) {
-      case 'home':
+      case pageType.HomePage:
         return <HomePage />;
-      case 'course':
+      case pageType.CoursesPage:
         return <CoursePage />;
-      case 'message':
+      case pageType.MessagePage:
         return <MessagePage />;
-      case 'personal':
+      case pageType.PersonalPage:
         return <PersonalPage />;
+      case pageType.RegisterPage:
+        return <RegisterPage />;
       default:
         return <HomePage />;
     }

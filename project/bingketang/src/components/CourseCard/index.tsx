@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { ICourse } from "@/constant/type";
+import { getAvatarProps } from "@/services/actions";
 
 import style from './index.module.less';
 import classnames  from 'classnames';
@@ -24,7 +25,7 @@ const CourseCard = (props: Iprops) => {
         </div>
       </div>
       <div className={classnames(style.avatarwrapper)}>
-        <Avatar className={classnames(style.avatar)} size={'large'} src={course.teacher.profile} />
+        <Avatar className={classnames(style.avatar)} size={'large'} {...getAvatarProps(course.teacher.profile)} />
       </div>
     </Card>
   );

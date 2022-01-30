@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IChat, IMessage } from "@/constant/type";
-import { getCurrentUser, getMessages } from "@/services/actions";
-import { Avatar, Button, Input, message } from 'antd';
+import { getAvatarProps, getCurrentUser, getMessages } from "@/services/actions";
+import { Avatar, Button, Input } from 'antd';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
@@ -28,7 +28,6 @@ const MessageDetail = (props: Iprops) => {
   }, [chat]);
 
   useLayoutEffect(() => {
-    console.log(messcontainerRef.current);
     if (messcontainerRef.current) {
       messcontainerRef.current.scrollTop = messcontainerRef.current.scrollHeight;
     }
@@ -39,7 +38,7 @@ const MessageDetail = (props: Iprops) => {
       <ul>
         {messages.map((value, index) => 
           <li className={classnames(style.mess, value.sendUser.id === currentUser.id && style.fromme)} key={index}>
-            <Avatar className={classnames(style.avatar)} src={value.sendUser.profile} />
+            <Avatar className={classnames(style.avatar)} {...getAvatarProps(value.sendUser.profile)} />
             <div className={classnames(style.text)}>{value.text}</div>
           </li>
         )}

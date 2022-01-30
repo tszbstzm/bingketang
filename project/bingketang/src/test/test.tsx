@@ -7,6 +7,13 @@ export const currentUser: IUser = {
   mail: 'SLJ19980705@163.com'
 };
 
+export const nullUser: IUser = {
+  id: '',
+  nickname: '',
+  profile: '',
+  mail: '',
+};
+
 export const createUser = (id: string) => {
   return {
     id,

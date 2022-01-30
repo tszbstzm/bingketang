@@ -18,11 +18,12 @@ interface Iprops {
 const FootToolbar = (props: Iprops) => {
   const navigate = useNavigate();
   const [currentTab, setCurrentTab] = useState(pageType.HomePage);
-  const currentUserId = getCurrentUser();
+  const currentUser = getCurrentUser();
+  const { LoginPanelModal, handleLoginPanel } = openLoginPanel();
 
   const handleClick = (key: pageType) => {
-    if (key !== pageType.HomePage && !currentUserId) {
-      openLoginPanel();
+    if (key !== pageType.HomePage && currentUser.id === '') {
+      handleLoginPanel();
       return;
     }
     setCurrentTab(key);
@@ -33,11 +34,11 @@ const FootToolbar = (props: Iprops) => {
     { key: pageType.HomePage, outlinedContent: <HomeOutlined />, filledContent: <HomeFilled />, content: MOBILE_HOME_PAGE },
     { key: pageType.CoursesPage, outlinedContent: <ReadOutlined />, filledContent: <ReadFilled />, content: MOBILE_MY_COURSES },
     { key: pageType.MessagePage, outlinedContent: <MessageOutlined />, filledContent: <MessageFilled />, content: MOBILE_MESSAGE_LIST },
-    { key: pageType.PersonalPage, outlinedContent: <Avatar size="small" icon={<UserOutlined />} />, content: MOBILE_MY_CENTER },
+    { key: pageType.PersonalPage, outlinedContent: <UserOutlined />, content: MOBILE_MY_CENTER },
   ];
 
   return (
-    <div className={classnames(style.foottoolbar, props.className)}>
+    <div className={classnames(style.foottoolbar, props.className, 'element--fixed')}>
       {footList.map((value) => (
         <FooterTab
           key={value.key}
@@ -47,6 +48,7 @@ const FootToolbar = (props: Iprops) => {
           isSelected={currentTab === value.key}
           onClick={() => handleClick(value.key)} />
       ))}
+      <LoginPanelModal />
     </div>
   );
 };

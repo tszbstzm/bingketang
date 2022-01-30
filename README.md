@@ -1,5 +1,5 @@
 # bingketang
-丙课堂，实现了网络学堂 + 雨课堂的基本功能
+丙课堂 = 网络学堂的公开课程推荐 + 雨课堂的开设课程、课程邀请码 + 网络学堂的基本功能
 
 ## 开发日志
 ### 2022-01-17
@@ -30,3 +30,8 @@
 1. add page: home page + course page
 
 心得：有的时候要想一想切换是用hook还是router
+
+### 2022-01-30
+1. add page: login panel + register page
+
+心得：1. 写了一个用open调用panel的函数，参考https://juejin.cn/post/7031719940348624933; 2. antd的modal弹出时会隐藏body的滚动条并且调整宽度，但是没有调整fixed宽度，会有一个闪动的视觉效果，为了避免手动setattribute了一下。
