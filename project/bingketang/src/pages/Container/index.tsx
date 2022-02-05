@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HeadToolbar from '@/components/HeadToolbar';
 import FootToolbar from '@/components/FootToolbar';
 import { useParams } from "react-router-dom";
@@ -7,6 +7,10 @@ import PersonalPage from '../PersonalPage';
 import CoursePage from '../CoursePage';
 import HomePage from '../HomePage';
 import RegisterPage from '../RegisterPage';
+import { nullUser } from '@/test/test';
+import { getCurrentUser } from '@/services/userinfo';
+import emitter from '@/services/utils/events';
+import { IUser } from '@/constant/type';
 
 import style from './index.module.less';
 import classNames  from 'classnames/bind';
@@ -30,6 +34,18 @@ export enum filterType {
 const PageContainer = () => {
   const params = useParams();
 
+  const [currentUser, setCurrentUser] = useState(nullUser);
+  
+  useEffect(() => {
+    getCurrentUser().then(user => setCurrentUser(user));
+  }, []);
+
+  useEffect(() => {
+    const setEmailLoginUser = (user: IUser) => setCurrentUser(user);
+    emitter.addListener('CHANGE LOGIN USER', setEmailLoginUser);
+    return () => { emitter.removeListener('CHANGE LOGIN USER', setEmailLoginUser); };
+  }, []);
+
   const getContent = (_pageType?: string) => {
     switch(_pageType) {
       case pageType.HomePage:
@@ -37,9 +53,9 @@ const PageContainer = () => {
       case pageType.CoursesPage:
         return <CoursePage />;
       case pageType.MessagePage:
-        return <MessagePage />;
+        return <MessagePage currentUser={currentUser} />;
       case pageType.PersonalPage:
-        return <PersonalPage />;
+        return <PersonalPage currentUser={currentUser} />;
       case pageType.RegisterPage:
         return <RegisterPage />;
       default:
@@ -49,9 +65,9 @@ const PageContainer = () => {
 
   return (
     <div className={style.pagecontainer}>
-      <HeadToolbar />
+      <HeadToolbar currentUser={currentUser} />
       <div className={cx('maincontainer', `maincontainer--${params.page}`)}>{getContent(params.page)}</div>
-      <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} />
+      <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} currentUser={currentUser} />
     </div>
   );
 };

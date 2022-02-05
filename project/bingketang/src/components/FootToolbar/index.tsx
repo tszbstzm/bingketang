@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import FooterTab from './FooterTab';
 import { HomeFilled, HomeOutlined, MessageFilled, MessageOutlined, ReadFilled, ReadOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
 import { MOBILE_HOME_PAGE, MOBILE_MESSAGE_LIST, MOBILE_MY_CENTER, MOBILE_MY_COURSES } from '@/constant/text';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser } from '@/services/actions';
+import { IUser } from '@/constant/type';
 import { openLoginPanel } from '@/components/loginPanel';
 import { pageType } from '@/pages/Container';
 
@@ -13,12 +12,13 @@ import classnames  from 'classnames';
 
 interface Iprops {
   className?: string;
+  currentUser: IUser
 }
 
 const FootToolbar = (props: Iprops) => {
+  const { currentUser } = props;
   const navigate = useNavigate();
   const [currentTab, setCurrentTab] = useState(pageType.HomePage);
-  const currentUser = getCurrentUser();
   const { LoginPanelModal, handleLoginPanel } = openLoginPanel();
 
   const handleClick = (key: pageType) => {

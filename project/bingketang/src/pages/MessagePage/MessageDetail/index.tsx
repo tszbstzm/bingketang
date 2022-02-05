@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { IChat, IMessage } from "@/constant/type";
-import { getAvatarProps, getCurrentUser, getMessages } from "@/services/actions";
+import { IChat, IMessage, IUser } from "@/constant/type";
+import { getAvatarProps, getMessages } from "@/services/actions";
 import { Avatar, Button, Input } from 'antd';
 
 import style from './index.module.less';
@@ -13,12 +13,12 @@ const { TextArea } = Input;
 interface Iprops {
   chat: IChat,
   className?: string,
-  onBack?: () => void
+  onBack?: () => void,
+  currentUser: IUser
 }
 
 const MessageDetail = (props: Iprops) => {
-  const { chat, className, onBack } = props;
-  const currentUser = getCurrentUser();
+  const { chat, className, onBack, currentUser } = props;
   const [messages, setMessages] = useState(getMessages(chat));
   const [value, setValue] = useState('');
   const messcontainerRef = useRef<HTMLDivElement>(null);
@@ -46,7 +46,12 @@ const MessageDetail = (props: Iprops) => {
     );
   };
 
-  const sendMessageValue = (text: string) => {
+  const sendMessageValue = (oriText: string, type?: string) => {
+    let text;
+    switch(type) {
+      default:
+        text = { plainText: text, text: text };
+    }
     return {
       id: String(Number(chat.id) + messages.length),
       chat,

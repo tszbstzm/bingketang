@@ -35,3 +35,8 @@
 1. add page: login panel + register page
 
 心得：1. 写了一个用open调用panel的函数，参考https://juejin.cn/post/7031719940348624933; 2. antd的modal弹出时会隐藏body的滚动条并且调整宽度，但是没有调整fixed宽度，会有一个闪动的视觉效果，为了避免手动setattribute了一下。
+
+### 2022-02-06
+1. 配置 egg + mysql + axios, update: login
+
+心得：1. 用egg配置了后端，mysql配置了数据库，axios实现ajax请求 2. 数据库要 运行 -> 连接 -> 访问，开始还以为是密码记错了，折腾了好久TAT 3. session跨域需要配置 4. 虽然花了半天时间才实现了小小的login功能，不过可以算把后端基本配好了，哈哈哈

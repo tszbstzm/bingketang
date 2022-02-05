@@ -21,7 +21,7 @@ const RegisterPage = () => {
       <Input />
     </Form.Item>
     <Form.Item className={classnames(style.formitem)} name="username" label={NICK_NAME_TEXT}
-      rules={[{ required: true, whitespace: true, message: REGISTER_NEED_NICKNAME }, { pattern: /^[A-Za-z0-9]{8,20}$/, message: ERROR_NICKNAME }]}>
+      rules={[{ required: true, whitespace: true, message: REGISTER_NEED_NICKNAME }, { pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]{4,20}$/, message: ERROR_NICKNAME }]}>
       <Input />
     </Form.Item>
     <Form.Item className={classnames(style.formitem)} name="password" label={PASSWORD_TEXT}

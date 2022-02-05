@@ -3,11 +3,6 @@ import { IChat } from "@/constant/type";
 import { createChat, createMessage, currentUser, createCourse, nullUser } from "@/test/test";
 import { UserOutlined } from "@ant-design/icons";
 
-export const getCurrentUser = () => {
-  return nullUser;
-  // return currentUser;
-};
-
 export const getChats = (num: number) => {
   return Array.from({ length: num }, (value, index) => createChat(String(10000000 + index * 10000)));
 };
