@@ -46,6 +46,12 @@ const PageContainer = () => {
     return () => { emitter.removeListener('CHANGE LOGIN USER', setEmailLoginUser); };
   }, []);
 
+  useEffect(() => {
+    const setQuitLoginUser = () => setCurrentUser(nullUser);
+    emitter.addListener('QUIT LOGIN USER', setQuitLoginUser);
+    return () => { emitter.removeListener('QUIT LOGIN USER', setQuitLoginUser); };
+  }, []);
+
   const getContent = (_pageType?: string) => {
     switch(_pageType) {
       case pageType.HomePage:

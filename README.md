@@ -40,3 +40,8 @@
 1. 配置 egg + mysql + axios, update: login
 
 心得：1. 用egg配置了后端，mysql配置了数据库，axios实现ajax请求 2. 数据库要 运行 -> 连接 -> 访问，开始还以为是密码记错了，折腾了好久TAT 3. session跨域需要配置 4. 虽然花了半天时间才实现了小小的login功能，不过可以算把后端基本配好了，哈哈哈
+
+### 2022-02-08
+1. add page: change password panel, update: register + quit + change password
+
+心得：1. 实现了和用户信息相关的功能 2. 休假结束开始上班了，每天没有多少事件可以写自己的东西了 TAT

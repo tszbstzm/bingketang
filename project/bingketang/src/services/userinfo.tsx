@@ -1,5 +1,5 @@
 import { nullUser } from "@/test/test";
-import { getUserFromService } from "./eggservices";
+import { getUserFromService, quitUserFromService } from "./eggservices";
 
 let currentUser = nullUser;
 
@@ -12,3 +12,10 @@ export const getCurrentUser = async () => {
   }
   return currentUser;
 };
+
+export const quitCurrentUser = () => {
+  quitUserFromService();
+  currentUser = nullUser;
+};
+
+export const getCurrentUserNow = () => currentUser;
