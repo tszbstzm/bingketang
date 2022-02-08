@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchInput from './SearchInput';
 import { Avatar, Dropdown, Menu } from 'antd';
 import { MessageOutlined, UserOutlined, ReadOutlined, UsergroupAddOutlined, PlusCircleTwoTone, FundProjectionScreenOutlined, HomeOutlined } from '@ant-design/icons';
 import { JOIN_A_COURSE, MY_CENTER, MY_COURSES, TEACH_A_COURSE } from '@/constant/text';
 import { useNavigate } from 'react-router-dom';
 import { pageType } from '@/pages/Container';
-import { getAvatarProps, getCurrentUser } from '@/services/actions';
+import { getAvatarProps } from '@/services/actions';
+import { IUser } from '@/constant/type';
 import { openLoginPanel } from '@/components/loginPanel';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
 
+interface Iprops {
+  currentUser: IUser
+}
 
-const HeadToolbar = () => {
+const HeadToolbar = (props: Iprops) => {
+  const { currentUser } = props;
   const navigate = useNavigate();
-  const currentUser = getCurrentUser();
   const currentUserId = currentUser.id;
   const { LoginPanelModal, handleLoginPanel } = openLoginPanel();
 

@@ -9,6 +9,9 @@ interface Iprops {
   title: string;
   okText: string;
   cancelText: string;
+  payload?: {
+    [key: string]: string;
+  }
 }
 
 export const useFormModal = (props: Iprops) => {
@@ -50,7 +53,7 @@ export const useFormModal = (props: Iprops) => {
           }
         }}
       >
-        <InnerForm onClose={close} ref={formref}/>
+        <InnerForm onClose={close} ref={formref} />
       </Modal>
     );
   };

@@ -2,7 +2,7 @@ export type IUser = {
   id: string,
   nickname: string,
   profile: string,
-  mail: string
+  email: string
 };
 
 export type IChat = {
@@ -14,7 +14,7 @@ export type IChat = {
 export type IMessage = {
   id: string,
   chat: IChat,
-  text: string,
+  text: object,
   sendUser: IUser,
   sendTime: Date
 };
