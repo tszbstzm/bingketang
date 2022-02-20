@@ -7,16 +7,23 @@ export type IUser = {
 
 export type IChat = {
   id: string,
-  fromUser: IUser,
   toUser: IUser,
 };
 
 export type IMessage = {
   id: string,
-  chat: IChat,
-  text: object,
+  chatid: string,
+  text: object | string,
   sendUser: IUser,
   sendTime: Date
+};
+
+export type IOMessage = {
+  id: string,
+  chatid: string,
+  text: string,
+  userid: string,
+  sendtime: string
 };
 
 export type ICourse = {

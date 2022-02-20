@@ -14,12 +14,12 @@ export default class Personal extends Service {
       if (!result) return { error: '20001' }
       if (!result.password || result.password !== password) return { error: '20002' };
       const userInfo = {
-        id: result.id,
+        id: String(result.id),
         nickname: result.nickname,
         profile: result.profile,
         email: result.email
       };
-      ctx.session = { userInfo: userInfo };
+      ctx.session = { userInfo };
       return { result: userInfo };
     } catch(e) {
       console.error(e);
@@ -45,10 +45,10 @@ export default class Personal extends Service {
       if (resultV1) return { error: '20004' };
       const result = await (app as any).mysql.insert('user', { ...oriUserInfo, password });
       const userInfo = {
-        id: result.insertId,
+        id: String(result.insertId),
         ...oriUserInfo
       };
-      ctx.session = { userInfo: userInfo };
+      ctx.session = { userInfo };
       return { result: userInfo };
     } catch(e) {
       console.error(e);

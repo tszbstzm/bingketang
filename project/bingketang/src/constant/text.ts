@@ -49,3 +49,4 @@ export const NEW_NEED_PASSWORD = '请输入新密码';
 export const NEW_PASSWORD_AGAIN = '确认新密码';
 export const NEW_NEED_PASSWORD_AGAIN = '请再次输入新密码';
 export const CHANGREPW_NOTMATCH = '现在的密码错误';
+export const OFFICIAL_MESSAGE = '系统消息';

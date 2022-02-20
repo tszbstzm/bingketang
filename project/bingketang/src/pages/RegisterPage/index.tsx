@@ -15,7 +15,6 @@ const RegisterPage = () => {
   const handleRegister = async (value: any) => {
     const { result } = await getRegisterInfo(value);
     if (result) {
-      console.log('***', result);
       emitter.emit('CHANGE LOGIN USER', result);
     }
     navigate(`/${pageType.HomePage}`);

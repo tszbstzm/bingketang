@@ -14,6 +14,11 @@ export const nullUser: IUser = {
   email: '',
 };
 
+export const nullChat: IChat = {
+  id: '',
+  toUser: nullUser
+};
+
 export const createUser = (id: string) => {
   return {
     id,
@@ -23,36 +28,36 @@ export const createUser = (id: string) => {
   } as IUser;
 };
 
-export const createChat = (id: string) => {
-  return {
-    id,
-    fromUser: currentUser,
-    toUser: createUser(id)
-  } as IChat;
-};
+// export const createChat = (id: string) => {
+//   return {
+//     id,
+//     fromUser: currentUser,
+//     toUser: createUser(id)
+//   } as IChat;
+// };
 
-const charMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+// const charMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-const createString = () => {
-  let res = '';
-  const randomLength = Math.ceil(Math.random() * 30);
-  for (let i = 0; i < randomLength; i++) {
-    res += charMap[Math.floor(Math.random() * 62)];
-  }
-  return res;
-};
+// const createString = () => {
+//   let res = '';
+//   const randomLength = Math.ceil(Math.random() * 30);
+//   for (let i = 0; i < randomLength; i++) {
+//     res += charMap[Math.floor(Math.random() * 62)];
+//   }
+//   return res;
+// };
 
-export const createMessage = (id: string, chat: IChat) => {
-  const random = Math.random();
-  const oriText = createString();
-  return {
-    id,
-    chat,
-    text: { plainText: oriText, text: oriText },
-    sendUser: random < 0.5 ? chat.fromUser : chat.toUser,
-    sendTime: new Date()
-  } as IMessage;
-};
+// export const createMessage = (id: string, chat: IChat) => {
+//   const random = Math.random();
+//   const oriText = createString();
+//   return {
+//     id,
+//     chatid: chat.id,
+//     text: { plainText: oriText, text: oriText },
+//     sendUser: random < 0.5 ? chat.fromUser : chat.toUser,
+//     sendTime: new Date()
+//   } as IMessage;
+// };
 
 export const createCourse = (id: string) => {
   return {

@@ -1,5 +1,6 @@
-import { IUser } from '@/constant/type';
+import { IChat, IMessage, IUser } from '@/constant/type';
 import axios from './utils/axios';
+import { socket } from './utils/io';
 
 interface IServiceResponse<T> {
   result?: T;
@@ -29,4 +30,25 @@ export const getRegisterInfo = async (submitValue: object) => {
 export const getChangePassword = async (submitValue: object) => {
   const { data } = await axios.post('/changepassword', submitValue);
   return data as IServiceResponse<undefined>;
+};
+
+export const getChatsFromService = async(userid: string) => {
+  const { data } = await axios.post('/userchats', { userid });
+  return data as IServiceResponse<IChat[]>;
+};
+
+export const getMessagesFromService = async(chatid: string) => {
+  const { data } = await axios.post('/usermessages', { chatid });
+  return data as IServiceResponse<IMessage[]>;
+};
+
+export const sendMessage = async(message: IMessage) => {
+  const { sendUser, sendTime: sendtime, ...rest } = message;
+  socket.emit('sendmessage', {
+    message: {
+      ...rest,
+      userid: sendUser.id,
+      sendtime: sendtime.toISOString().slice(0, 19).replace('T', ' ')
+    }
+  });
 };

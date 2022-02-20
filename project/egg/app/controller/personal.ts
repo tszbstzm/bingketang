@@ -18,7 +18,7 @@ export default class PersonalController extends Controller {
       status: 200,
       data: {
         result,
-        errorcode: !result && (error || '20001')
+        errorcode: !result && (error || '10001')
       }
     }
   }
@@ -39,7 +39,7 @@ export default class PersonalController extends Controller {
       status: 200,
       data: {
         result,
-        errorcode: !result && (error || '20002')
+        errorcode: !result && (error || '10002')
       }
     }
   }

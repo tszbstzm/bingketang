@@ -44,11 +44,23 @@ export default (appInfo: EggAppInfo) => {
     }
   };
 
+  const socketioConfig = {
+    io: {
+      init: {},
+      namespace: {
+        '/': {
+          connectionMiddleware: ['auth']
+        }
+      }
+    }
+  };
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
     ...bizConfig,
     ...mysqlConfig,
-    ...corsConfig
+    ...corsConfig,
+    ...socketioConfig
   };
 };

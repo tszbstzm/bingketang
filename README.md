@@ -43,5 +43,11 @@
 
 ### 2022-02-08
 1. add page: change password panel, update: register + quit + change password
+2. 配置：.gitgnore
 
 心得：1. 实现了和用户信息相关的功能 2. 休假结束开始上班了，每天没有多少事件可以写自己的东西了 TAT
+
+### 2022-02-21
+1. 配置socket.io, update: message
+
+心得：1. 学习了一下websocket 2. egg-socket.io和ts结合的不是很好，也不适用于最新的socket.io-client了，翻了翻开发日志居然是四五年前的东西了，看来现在很少有人在web端即时通讯了 3. 有很多做的不完善的地方，比如现在的发送内容仅支持文本（可以用json解决对象存储）、然后每次切换会话都要到服务端拉数据，最好一次拉取所有会话的消息（本来打算这样写，写着写着又写偏了），能加入本地存储（这里适用localstorage吗） 4. 发现上一次更新是大半个月前了，说明我太爱偷懒了。明天要开学了。

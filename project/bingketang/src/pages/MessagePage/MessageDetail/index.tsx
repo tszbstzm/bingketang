@@ -1,12 +1,15 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { IChat, IMessage, IUser } from "@/constant/type";
-import { getAvatarProps, getMessages } from "@/services/actions";
+import { IChat, IMessage, IOMessage, IUser } from "@/constant/type";
+import { getAvatarProps } from "@/services/actions";
 import { Avatar, Button, Input } from 'antd';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
 import { CANCEL_COMMEN, SEND_COMMEN_MOBILE, SEND_COMMEN_PC } from "@/constant/text";
 import { LeftOutlined } from "@ant-design/icons";
+import { getMessages } from "@/services/message";
+import { sendMessage } from "@/services/eggservices";
+import { socket } from "@/services/utils/io";
 
 const { TextArea } = Input;
 
@@ -19,13 +22,35 @@ interface Iprops {
 
 const MessageDetail = (props: Iprops) => {
   const { chat, className, onBack, currentUser } = props;
-  const [messages, setMessages] = useState(getMessages(chat));
+  const [messages, setMessages] = useState<IMessage[]>([]);
   const [value, setValue] = useState('');
   const messcontainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMessages(getMessages(chat));
-  }, [chat]);
+    if (chat.id !== '') {
+      getMessages(chat).then(
+        value => {
+          setMessages(value);
+      });
+    }
+  }, [chat]); // 能不能一次拉取？
+
+  useEffect(() => {
+    const handlePushMessage = (message: IOMessage) => {
+      if (message.chatid === chat.id && message.userid !== currentUser.id) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { userid, sendtime, ...rest } = message;
+        const newmessage = {
+          ...rest,
+          sendUser: chat.toUser,
+          sendTime: new Date(Date.parse(sendtime)),
+        };
+        setMessages(messages.concat(newmessage));
+      }
+    };
+    socket.on('pushmessage', handlePushMessage);
+    return () => socket.off('pushmessage', handlePushMessage);
+  });
 
   useLayoutEffect(() => {
     if (messcontainerRef.current) {
@@ -46,15 +71,10 @@ const MessageDetail = (props: Iprops) => {
     );
   };
 
-  const sendMessageValue = (oriText: string, type?: string) => {
-    let text;
-    switch(type) {
-      default:
-        text = { plainText: text, text: text };
-    }
+  const sendMessageValue = (text: string) => {
     return {
-      id: String(Number(chat.id) + messages.length),
-      chat,
+      id: '',
+      chatid: chat.id,
       text,
       sendUser: currentUser,
       sendTime: new Date()
@@ -63,10 +83,14 @@ const MessageDetail = (props: Iprops) => {
 
   const handleSend = () => {
     if (value.replace(/[ ]/g,"").replace(/[\r\n]/g,"").length) {
-      setMessages(messages.concat(sendMessageValue(value)));
+      const mess = sendMessageValue(value);
+      setMessages(messages.concat(mess));
+      sendMessage(mess);
     }
     setValue('');
   };
+
+  if (chat.id === '') return null;
 
   return (
     <div className={classnames(className, style.messagedetail)}>
