@@ -1,4 +1,4 @@
-import { IChat, IMessage, IUser } from '@/constant/type';
+import { IChat, ICourse, IMessage, IUser } from '@/constant/type';
 import axios from './utils/axios';
 import { socket } from './utils/io';
 
@@ -51,4 +51,19 @@ export const sendMessage = async(message: IMessage) => {
       sendtime: sendtime.toISOString().slice(0, 19).replace('T', ' ')
     }
   });
+};
+
+export const getHomeCoursesFromService = async(query: string) => {
+  const { data } = await axios.get(`/homecourses?query=${query}`);
+  return data as IServiceResponse<ICourse[]>;
+};
+
+export const getMyStudyCoursesFromService = async(userid: string) => {
+  const { data } = await axios.post('/studycourses', { userid });
+  return data as IServiceResponse<ICourse[]>;
+};
+
+export const getMyTeachCoursesFromService = async(userid: string) => {
+  const { data } = await axios.post('/teachcourses', { userid });
+  return data as IServiceResponse<ICourse[]>;
 };

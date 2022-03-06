@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SearchInput from './SearchInput';
-import { Avatar, Dropdown, Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
 import { MessageOutlined, UserOutlined, ReadOutlined, UsergroupAddOutlined, PlusCircleTwoTone, FundProjectionScreenOutlined, HomeOutlined } from '@ant-design/icons';
 import { JOIN_A_COURSE, MY_CENTER, MY_COURSES, TEACH_A_COURSE } from '@/constant/text';
 import { useNavigate } from 'react-router-dom';
 import { pageType } from '@/pages/Container';
-import { getAvatarProps } from '@/services/actions';
 import { IUser } from '@/constant/type';
 import { openLoginPanel } from '@/components/loginPanel';
+import UserAvatar from '../UserAvatar';
 
 import style from './index.module.less';
 import classnames  from 'classnames';
@@ -71,7 +71,7 @@ const HeadToolbar = (props: Iprops) => {
       </Dropdown>
       <Dropdown overlay={getMenu(personalMenuList, handlePersonal)} overlayClassName={classnames(style.dropdown)} placement="bottomRight">
       <div className={classnames(style.icon, 'xs_hidden')}>
-        <Avatar {...getAvatarProps(currentUser.profile)} />
+        <UserAvatar profile={currentUser.profile || ''} />
       </div>
       </Dropdown>
       <LoginPanelModal />

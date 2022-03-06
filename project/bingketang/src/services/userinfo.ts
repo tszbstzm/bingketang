@@ -1,5 +1,12 @@
-import { nullUser } from "@/test/test";
+import { IUser } from "@/constant/type";
 import { getUserFromService, quitUserFromService } from "./eggservices";
+
+export const nullUser: IUser = {
+  id: '',
+  nickname: '',
+  profile: '',
+  email: '',
+};
 
 let currentUser = nullUser;
 

@@ -8,8 +8,6 @@ import 'antd/dist/antd.css';
 
 const App = () => (
   <Routes>
-    <Route path = '/:page/:filter/:id' element={<PageContainer />} />
-    <Route path = '/:page/:filter' element={<PageContainer />} />
     <Route path = '/:page' element={<PageContainer />} />
     <Route path = '*' element={<Navigate to="/home" />} />
   </Routes>

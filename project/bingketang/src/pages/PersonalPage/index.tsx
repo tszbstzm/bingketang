@@ -1,6 +1,5 @@
 import React from "react";
-import { getAvatarProps } from "@/services/actions";
-import { Avatar, Button } from "antd";
+import { Button } from "antd";
 import { CHANGE_PASSWORD, QUIT } from "@/constant/text";
 import { IUser } from "@/constant/type";
 import { quitCurrentUser } from "@/services/userinfo";
@@ -8,6 +7,7 @@ import emitter from '@/services/utils/events';
 import { useNavigate } from "react-router-dom";
 import { pageType } from "../Container";
 import { openChangePwPanel } from "@/components/changePasswordPanel";
+import UserAvatar from "@/components/UserAvatar";
 
 import style from './index.module.less';
 import classnames  from 'classnames';
@@ -31,9 +31,11 @@ const PersonalPage = (props: Iprops) => {
     handleChangePwPanel();
   };
 
+  if (!props.currentUser || !props.currentUser.id) return null;
+
   return (
     <div className={classnames(style.personalpage)}>
-      <Avatar className={classnames(style.avatar)} size={'large'} {...getAvatarProps(currentUser.profile)} />
+      <UserAvatar className={classnames(style.avatar)} size={'large'} profile={currentUser.profile || ''} />
       <div className={classnames(style.nickname, style.text)}>{currentUser.nickname}</div>
       <div className={classnames(style.mail, style.text)}>{currentUser.email}</div>
       <Button className={classnames(style.button)} onClick={handlePassword}>{CHANGE_PASSWORD}</Button>

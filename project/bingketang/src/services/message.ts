@@ -1,5 +1,11 @@
 import { IChat, IUser } from "@/constant/type";
 import { getChatsFromService, getMessagesFromService } from "./eggservices";
+import { nullUser } from "./userinfo";
+
+export const nullChat: IChat = {
+  id: '',
+  toUser: nullUser
+};
 
 export const getChats = async (user: IUser) => {
   const chats = await getChatsFromService(user.id);

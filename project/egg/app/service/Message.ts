@@ -36,7 +36,7 @@ export default class Message extends Service {
   }
 
     /**
-   * Get chats with chat id
+   * Get messages with chat id
    * @param chatid
   */
      public async getMessages(chatid: string) {

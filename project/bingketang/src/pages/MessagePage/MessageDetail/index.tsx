@@ -1,15 +1,16 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { IChat, IMessage, IOMessage, IUser } from "@/constant/type";
-import { getAvatarProps } from "@/services/actions";
-import { Avatar, Button, Input } from 'antd';
-
-import style from './index.module.less';
-import classnames  from 'classnames';
+import { IChat, IMessage, IUser } from "@/constant/type";
+import { Button, Input } from 'antd';
 import { CANCEL_COMMEN, SEND_COMMEN_MOBILE, SEND_COMMEN_PC } from "@/constant/text";
 import { LeftOutlined } from "@ant-design/icons";
 import { getMessages } from "@/services/message";
 import { sendMessage } from "@/services/eggservices";
 import { socket } from "@/services/utils/io";
+import { IOMessage } from "@/constant/sqltype";
+import UserAvatar from "@/components/UserAvatar";
+
+import style from './index.module.less';
+import classnames  from 'classnames';
 
 const { TextArea } = Input;
 
@@ -63,7 +64,7 @@ const MessageDetail = (props: Iprops) => {
       <ul>
         {messages.map((value, index) => 
           <li className={classnames(style.mess, value.sendUser.id === currentUser.id && style.fromme)} key={index}>
-            <Avatar className={classnames(style.avatar)} {...getAvatarProps(value.sendUser.profile)} />
+            <UserAvatar className={classnames(style.avatar)} profile={value.sendUser.profile || ''} />
             <div className={classnames(style.text)}>{value.text}</div>
           </li>
         )}

@@ -1,37 +1,28 @@
 export type IUser = {
-  id: string,
-  nickname: string,
-  profile: string,
-  email: string
+  id: string;
+  nickname: string;
+  profile: string;
+  email: string;
 };
 
 export type IChat = {
-  id: string,
-  toUser: IUser,
+  id: string; // 为非自动id
+  toUser: IUser;
 };
 
 export type IMessage = {
-  id: string,
-  chatid: string,
-  text: object | string,
-  sendUser: IUser,
-  sendTime: Date
-};
-
-export type IOMessage = {
-  id: string,
-  chatid: string,
-  text: string,
-  userid: string,
-  sendtime: string
+  id: string;
+  chatid: string;
+  text: object | string;
+  sendUser: IUser;
+  sendTime: Date;
 };
 
 export type ICourse = {
-  id: string,
-  teacher: IUser,
-  title: string,
-  description: string,
-  follower: number,
-  cover: string
-  longCover?: string
+  id: string;
+  teacher: IUser;
+  title: string;
+  description: string;
+  cover: string;
+  follower: string;
 };

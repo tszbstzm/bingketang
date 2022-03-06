@@ -1,7 +1,6 @@
 import React from "react";
 import { IChat } from "@/constant/type";
-import Avatar from "antd/lib/avatar/avatar";
-import { getAvatarProps } from "@/services/actions";
+import UserAvatar from "@/components/UserAvatar";
 
 import style from './index.module.less';
 import classnames  from 'classnames';
@@ -22,7 +21,7 @@ const MessageItem = (props: Iprops) => {
 
   return (
     <li className={classnames(style.item)} onClick={handleClick}>
-      <Avatar className={classnames(style.avatar)} {...getAvatarProps(chat.toUser.profile)} />
+      <UserAvatar className={classnames(style.avatar)} profile={chat.toUser.profile || ''} />
       <div>{chat.toUser.nickname}</div>
     </li>
   );

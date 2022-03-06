@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import MessageDetail from "./MessageDetail";
 import MessageItem from "./MessageItem";
 import { IChat, IUser } from "@/constant/type";
-import { getChats } from "@/services/message";
-import { nullChat } from "@/test/test";
+import { getChats, nullChat } from "@/services/message";
 
 import style from './index.module.less';
 import classnames  from 'classnames';
@@ -16,7 +15,6 @@ const MessagePage = (props: Iprops) => {
   const [chatList, setChatlist] = useState<IChat[]>([]);
   const [chat, setChat] = useState<IChat>(nullChat);
   const [chatActive, setChatActive] = useState(false);
-  // const [messages, setMessages] = useState<IMessage[]>([]);
 
   useEffect(() => {
     getChats(props.currentUser).then(
@@ -25,6 +23,8 @@ const MessagePage = (props: Iprops) => {
         setChat(value[0]);
     });
   }, []);
+
+  if (!props.currentUser || !props.currentUser.id) return null;
 
   return (
     <div className={classnames(style.messagepage)}>
@@ -36,8 +36,6 @@ const MessagePage = (props: Iprops) => {
         chat={chat} 
         onBack={() => setChatActive(false)}
         currentUser={props.currentUser}
-        // messages={messages}
-        // messages={messageList.filter((value) => chat && value.chatid === chat.id)}
       />
     </div>
   );

@@ -1,16 +1,35 @@
-import React, { useState } from "react";
-import { getCourses } from "@/services/actions";
+import React, { useEffect, useState } from "react";
 import { filterType } from "../Container";
 import { Button } from "antd";
 import { MY_STUDY_COURSE, MY_TEACH_COURSE } from "@/constant/text";
 import CourseCard from "@/components/CourseCard";
+import { ICourse, IUser } from "@/constant/type";
+import { getMyStudyCourses, getMyTeachCourses } from "@/services/courses";
 
 import style from './index.module.less';
 import classnames  from 'classnames';
 
-const CoursePage = () => {
-  const [course, setCourse] = useState(getCourses(20));
+interface Iprops {
+  currentUser: IUser;
+}
+
+const CoursePage = (props: Iprops) => {
+  const [course, setCourse] = useState<ICourse[]>([]);
   const [filter, setFilter] = useState(filterType.MyStudyCourse);
+
+  useEffect(() => {
+    if (filter === filterType.MyStudyCourse) {
+      getMyStudyCourses(props.currentUser).then(
+        value => {
+          setCourse(value);
+      });
+    } else if (filter === filterType.MyTeachCourse) {
+      getMyTeachCourses(props.currentUser).then(
+        value => {
+          setCourse(value);
+      });
+    }
+  }, [filter]);
 
   const handleChangeFilter = (thisFilter: number) => {
     if (thisFilter === filter) {
@@ -18,12 +37,12 @@ const CoursePage = () => {
     }
     if (thisFilter === filterType.MyStudyCourse) {
       setFilter(filterType.MyStudyCourse);
-      setCourse(getCourses(20));
     } else if (thisFilter === filterType.MyTeachCourse) {
       setFilter(filterType.MyTeachCourse);
-      setCourse(getCourses(5));
     }
   };
+
+  if (!props.currentUser || !props.currentUser.id) return null;
 
   return (
     <div className={classnames(style.coursepage)}>

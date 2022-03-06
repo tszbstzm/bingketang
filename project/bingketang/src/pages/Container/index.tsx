@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import HeadToolbar from '@/components/HeadToolbar';
 import FootToolbar from '@/components/FootToolbar';
-import { useParams } from "react-router-dom";
-import MessagePage from '../MessagePage';
-import PersonalPage from '../PersonalPage';
-import CoursePage from '../CoursePage';
-import HomePage from '../HomePage';
-import RegisterPage from '../RegisterPage';
-import { nullUser } from '@/test/test';
-import { getCurrentUser } from '@/services/userinfo';
+import { useParams, useSearchParams } from "react-router-dom";
+import { getCurrentUser, nullUser } from '@/services/userinfo';
 import emitter from '@/services/utils/events';
 import { IUser } from '@/constant/type';
+import { Spin } from 'antd';
 
 import style from './index.module.less';
 import classNames  from 'classnames/bind';
@@ -31,8 +26,16 @@ export enum filterType {
   MyTeachCourse
 }
 
+const MessagePage = React.lazy(() => import('../MessagePage'));
+const PersonalPage = React.lazy(() => import('../PersonalPage'));
+const CoursePage = React.lazy(() => import('../CoursePage'));
+const HomePage = React.lazy(() => import('../HomePage'));
+const RegisterPage = React.lazy(() => import('../RegisterPage'));
+
 const PageContainer = () => {
   const params = useParams();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';
 
   const [currentUser, setCurrentUser] = useState(nullUser);
   
@@ -52,12 +55,13 @@ const PageContainer = () => {
     return () => { emitter.removeListener('QUIT LOGIN USER', setQuitLoginUser); };
   }, []);
 
-  const getContent = (_pageType?: string) => {
-    switch(_pageType) {
+  const ContentPage = (props: { page?: string; query?: string }) => {
+    if (query) return <HomePage query={query} />;
+    switch(props.page) {
       case pageType.HomePage:
         return <HomePage />;
       case pageType.CoursesPage:
-        return <CoursePage />;
+        return <CoursePage currentUser={currentUser} />;
       case pageType.MessagePage:
         return <MessagePage currentUser={currentUser} />;
       case pageType.PersonalPage:
@@ -70,11 +74,13 @@ const PageContainer = () => {
   };
 
   return (
-    <div className={style.pagecontainer}>
-      <HeadToolbar currentUser={currentUser} />
-      <div className={cx('maincontainer', `maincontainer--${params.page}`)}>{getContent(params.page)}</div>
-      <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} currentUser={currentUser} />
-    </div>
+    <React.Suspense fallback={<Spin size='large' />}>
+      <div className={style.pagecontainer}>
+        <HeadToolbar currentUser={currentUser} />
+        <div className={cx('maincontainer', `maincontainer--${params.page}`)}>{<ContentPage page={params.page} query={query}/>}</div>
+        <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} currentUser={currentUser} />
+      </div>
+    </React.Suspense>
   );
 };
 
