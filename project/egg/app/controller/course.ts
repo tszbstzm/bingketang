@@ -36,4 +36,16 @@ export default class CourseController extends Controller {
       }
     }
   }
+
+  public async getCourse() {
+    const { ctx } = this;
+    const { result, error } = await ctx.service.course.getCourse();
+    ctx.body = {
+      status: 200,
+      data: {
+        result,
+        errorcode: !result && (error || '70004')
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import SearchInput from './SearchInput';
 import { Dropdown, Menu } from 'antd';
 import { MessageOutlined, UserOutlined, ReadOutlined, UsergroupAddOutlined, PlusCircleTwoTone, FundProjectionScreenOutlined, HomeOutlined } from '@ant-design/icons';
@@ -22,20 +22,20 @@ const HeadToolbar = (props: Iprops) => {
   const currentUserId = currentUser.id;
   const { LoginPanelModal, handleLoginPanel } = openLoginPanel();
 
-  const handleHome = () => {
+  const handleHome = useCallback(() => {
     navigate(`/${pageType.HomePage}`);
-  };
+  }, []);
 
-  const handleMessage = () => {
+  const handleMessage = useCallback(() => {
     navigate(`/${pageType.MessagePage}`);
-  };
+  }, []);
 
-  const handleAddCourse = () => {
-  };
+  const handleAddCourse = useCallback(() => {
+  }, []);
 
-  const handlePersonal = (param: { key: string }) => {
+  const handlePersonal = useCallback((param: { key: string }) => {
     navigate(`/${param.key}`);
-  };
+  }, []);
   
   const addCourseMenuList = [
     { Icon: FundProjectionScreenOutlined, content: TEACH_A_COURSE }, 

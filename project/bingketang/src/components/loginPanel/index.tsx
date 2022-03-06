@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Checkbox, Form, FormInstance, Input } from 'antd';
+import React, { useCallback, useState } from 'react';
+import { Form, FormInstance, Input } from 'antd';
 import { ACT_AFTER_LOGIN_TEXT, CANCEL_COMMEN, EMAIL_ADDRESS_TEXT, FORGET_PASSWORD, LOGIN_NEED_EMAIL, LOGIN_NEED_PASSWORD, LOGIN_NOTMATCH, LOGIN_TEXT, NEW_USER_REGISTER_TEXT, NICK_NAME_TEXT, PASSWORD_TEXT, REMEMBER_ME } from '@/constant/text';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useFormModal } from '../FormModal';
@@ -21,12 +21,12 @@ export const openLoginPanel = () => {
     const navigate = useNavigate();
     const [errorVisible, setErrorVisible] = useState(false);
     
-    const handleRegister = () => {
+    const handleRegister = useCallback(() => {
       navigate(`/${pageType.RegisterPage}`);
       props.onClose();
-    };
+    }, [props]);
 
-    const handleSumbit = async (value: any) => {
+    const handleSumbit = useCallback(async (value: any) => {
       const { result } = await getLoginInfo(value);
       if (result) {
         emitter.emit('CHANGE LOGIN USER', result);
@@ -34,7 +34,7 @@ export const openLoginPanel = () => {
       } else {
         setErrorVisible(true);
       }
-    };
+    }, [props]);
 
     return (
       <Form

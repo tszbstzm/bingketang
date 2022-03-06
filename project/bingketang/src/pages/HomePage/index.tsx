@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Carousel, Pagination, Image } from "antd";
 import CourseCard from "@/components/CourseCard";
 import { createLongcovers } from "@/services/longcover";
@@ -27,9 +27,9 @@ const HomePage = (props: Iprops) => {
     });
   }, [query]);
 
-  const handlePageChange = (_page: number) => {
+  const handlePageChange = useCallback((_page: number) => {
     setPage(_page - 1);
-  };
+  }, []);
 
   return (
     <div className={classnames(style.homepage)}>

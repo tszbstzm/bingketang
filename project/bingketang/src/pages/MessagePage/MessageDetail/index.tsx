@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IChat, IMessage, IUser } from "@/constant/type";
 import { Button, Input } from 'antd';
 import { CANCEL_COMMEN, SEND_COMMEN_MOBILE, SEND_COMMEN_PC } from "@/constant/text";
@@ -91,7 +91,7 @@ const MessageDetail = (props: Iprops) => {
     setValue('');
   };
 
-  if (chat.id === '') return null;
+  if (!chat.id) return null;
 
   return (
     <div className={classnames(className, style.messagedetail)}>

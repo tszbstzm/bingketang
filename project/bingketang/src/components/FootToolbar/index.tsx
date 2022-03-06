@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import FooterTab from './FooterTab';
 import { HomeFilled, HomeOutlined, MessageFilled, MessageOutlined, ReadFilled, ReadOutlined, UserOutlined } from '@ant-design/icons';
 import { MOBILE_HOME_PAGE, MOBILE_MESSAGE_LIST, MOBILE_MY_CENTER, MOBILE_MY_COURSES } from '@/constant/text';
@@ -21,14 +21,14 @@ const FootToolbar = (props: Iprops) => {
   const [currentTab, setCurrentTab] = useState(pageType.HomePage);
   const { LoginPanelModal, handleLoginPanel } = openLoginPanel();
 
-  const handleClick = (key: pageType) => {
+  const handleClick = useCallback((key: pageType) => {
     if (key !== pageType.HomePage && currentUser.id === '') {
       handleLoginPanel();
       return;
     }
     setCurrentTab(key);
     navigate(`/${key}`);
-  };
+  }, [currentUser]);
 
   const footList = [
     { key: pageType.HomePage, outlinedContent: <HomeOutlined />, filledContent: <HomeFilled />, content: MOBILE_HOME_PAGE },

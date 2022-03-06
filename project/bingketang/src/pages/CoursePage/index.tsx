@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { filterType } from "../Container";
 import { Button } from "antd";
 import { MY_STUDY_COURSE, MY_TEACH_COURSE } from "@/constant/text";
@@ -31,7 +31,7 @@ const CoursePage = (props: Iprops) => {
     }
   }, [filter]);
 
-  const handleChangeFilter = (thisFilter: number) => {
+  const handleChangeFilter = useCallback((thisFilter: number) => {
     if (thisFilter === filter) {
       return;
     }
@@ -40,7 +40,7 @@ const CoursePage = (props: Iprops) => {
     } else if (thisFilter === filterType.MyTeachCourse) {
       setFilter(filterType.MyTeachCourse);
     }
-  };
+  }, [filter]);
 
   if (!props.currentUser || !props.currentUser.id) return null;
 

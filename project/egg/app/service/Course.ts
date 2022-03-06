@@ -147,4 +147,49 @@ export default class Course extends Service {
       return { error: '80003' };
     }
   }
+
+  /**
+   * Get couse for home page
+  */
+  public async getCourse() {
+    const { app } = this;
+    const { id } = this.ctx.params;
+    try {
+      const results = await (app as any).mysql.query(
+        `SELECT mycourse.id as courseid, teacherid, title, description, cover, nickname, profile, email, ifnull(followers, 0) as follower
+        FROM (
+          SELECT *
+          FROM course
+          WHERE id = ${id}
+        ) mycourse
+        LEFT JOIN user
+        ON mycourse.teacherid = user.id
+        LEFT JOIN (
+          SELECT courseid, count(DISTINCT userid) as followers
+          FROM follower
+          WHERE action = 1
+          GROUP BY courseid
+        ) cf
+        ON mycourse.id = cf.courseid`
+      );
+      const value = results[0];
+      const courseInfo = {
+        id: String(value.courseid),
+        teacher: {
+          id: String(value.teacherid),
+          nickname: value.nickname,
+          profile: value.profile,
+          email: value.email
+        },
+        title: value.title,
+        description: value.description,
+        cover: value.cover,
+        follower: String(value.follower)
+      };
+      return { result: courseInfo };
+    } catch(e) {
+      console.error(e);
+      return { error: '80004' };
+    }
+  }
 }

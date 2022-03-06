@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, FormInstance, Input } from 'antd';
 import { CANCEL_COMMEN, CHANGE_PASSWORD, CHANGREPW_NOTMATCH, CONFIRM_TEXT, ERROR_PASSWORD, ERROR_PASSWORD_AGAIN, NEW_NEED_PASSWORD, NEW_NEED_PASSWORD_AGAIN, NEW_PASSWORD_AGAIN, NEW_PASSWORD_TEXT, OLD_NEED_PASSWORD, OLD_PASSWORD_TEXT } from '@/constant/text';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
@@ -19,14 +19,14 @@ export const openChangePwPanel = () => {
     const [errorVisible, setErrorVisible] = useState(false);
     const currentUser = getCurrentUserNow();
 
-    const handleSumbit = async (value: any) => {
+    const handleSumbit = useCallback(async (value: any) => {
       const { code } = await getChangePassword(value);
       if (!code) {
         props.onClose();
       } else {
         setErrorVisible(true);
       }
-    };
+    }, [props]);
 
     return (
       <Form

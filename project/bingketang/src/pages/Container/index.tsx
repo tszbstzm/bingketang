@@ -18,7 +18,8 @@ export enum pageType {
   CoursesPage = 'course',
   MessagePage = 'message',
   PersonalPage = 'personal',
-  RegisterPage = 'register'
+  RegisterPage = 'register',
+  DetailPage = 'detail'
 }
 
 export enum filterType {
@@ -31,9 +32,11 @@ const PersonalPage = React.lazy(() => import('../PersonalPage'));
 const CoursePage = React.lazy(() => import('../CoursePage'));
 const HomePage = React.lazy(() => import('../HomePage'));
 const RegisterPage = React.lazy(() => import('../RegisterPage'));
+const DetailPage = React.lazy(() => import('../DetailPage'));
 
 const PageContainer = () => {
   const params = useParams();
+  const { page, id } = params;
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
 
@@ -55,8 +58,10 @@ const PageContainer = () => {
     return () => { emitter.removeListener('QUIT LOGIN USER', setQuitLoginUser); };
   }, []);
 
-  const ContentPage = (props: { page?: string; query?: string }) => {
+  const ContentPage = (props: { page?: string; course?: string; query?: string }) => {
+    const { page, course, query } = props;
     if (query) return <HomePage query={query} />;
+    if (page === pageType.DetailPage && course) return <DetailPage currentUser={currentUser} courseid={course} />;
     switch(props.page) {
       case pageType.HomePage:
         return <HomePage />;
@@ -74,10 +79,10 @@ const PageContainer = () => {
   };
 
   return (
-    <React.Suspense fallback={<Spin size='large' />}>
+    <React.Suspense fallback={<Spin size='large' className={cx('spin')} />}>
       <div className={style.pagecontainer}>
         <HeadToolbar currentUser={currentUser} />
-        <div className={cx('maincontainer', `maincontainer--${params.page}`)}>{<ContentPage page={params.page} query={query}/>}</div>
+        <div className={cx('maincontainer', `maincontainer--${params.page}`)}>{<ContentPage page={page} course={id} query={query}/>}</div>
         <FootToolbar className={classnames('sm_hidden', 'md_hidden', 'lg_hidden')} currentUser={currentUser} />
       </div>
     </React.Suspense>

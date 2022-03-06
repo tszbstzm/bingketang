@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { IChat } from "@/constant/type";
 import UserAvatar from "@/components/UserAvatar";
 
@@ -13,11 +13,11 @@ interface Iprops {
 const MessageItem = (props: Iprops) => {
   const { chat, onClick } = props;
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (onClick) {
       onClick();
     }
-  };
+  }, [onClick]);
 
   return (
     <li className={classnames(style.item)} onClick={handleClick}>

@@ -12,6 +12,7 @@ export default (app: Application & { io?: any }) => {
   router.post('/usermessages', controller.message.getMessages);
   router.get('/homecourses', controller.course.getHomeCourses);
   router.post('/studycourses', controller.course.getStudyCourses);
-  router.post('/teachcourses', controller.course.getTeachCourses)
+  router.post('/teachcourses', controller.course.getTeachCourses);
+  router.get('/course/:id', controller.course.getCourse);
   io.of('/').route('sendmessage', io.controller.default.sendmessage);
 };

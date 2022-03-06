@@ -67,3 +67,8 @@ export const getMyTeachCoursesFromService = async(userid: string) => {
   const { data } = await axios.post('/teachcourses', { userid });
   return data as IServiceResponse<ICourse[]>;
 };
+
+export const getCourseFromService = async(courseid: string) => {
+  const { data } = await axios.get(`/course/${courseid}`);
+  return data as IServiceResponse<ICourse>;
+};
